@@ -18,4 +18,4 @@ curso = {
 
 }
 
-print(curso['dificultad'])
+print(curso['skills'][0]['nivel'])
