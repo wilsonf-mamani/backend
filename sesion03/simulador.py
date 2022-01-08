@@ -12,14 +12,12 @@ objFaker.add_provider(internet)
 # print(objFaker.free_email())
 # print(objFaker.name())
 
-# cursos = ['COMUNICACION', 'CTA', 'INGLES', 'FRENCH']
+cursos = ['COMUNICACION', 'CTA', 'INGLES', 'FRENCH']
 
-# for curso in cursos:
-#     print(f"INSERT INTO CURSOS (nombre) VALUES ('{curso}');")
+for curso in cursos:
+    print(f"INSERT INTO CURSOS (nombre) VALUES ('{curso}');")
 
-# INSERT INTO personas (nombre, dni, fecha_nacimiento, sexo, estado, created_at) VALUES
-#                      ('Patricio', '12964757', '1991-08-01', 'otro', true, now());  
-print('INSERT INTO personas (nombre, apellidos, email) VALUES')
+print('INSERT INTO alumnos (nombre, apellido, correo) VALUES')
 for i in range(100):
     myfirstname = objFaker.first_name()
     mylastname = objFaker.last_name()
@@ -27,5 +25,3 @@ for i in range(100):
 
     print(f"('{myfirstname}','{mylastname}','{myemail}'),")
 
-# INSERT INTO personas (nombre, dni, fecha_nacimiento, sexo, estado, created_at) VALUES
-#                      ('Patricio', '12964757', '1991-08-01', 'otro', true, now());  
