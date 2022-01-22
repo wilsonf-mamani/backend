@@ -11,7 +11,7 @@ class PersonaModel(models.Model):
         ('viudo', 'VIUDO'),
         ('divorciado', 'DIVORCIADO'),
         ('complicado', 'COMPLICADO'),                        
-        ('no_especifica', 'NO_ESPECIFICA')
+        ('no_especifica', 'NO_ESPECIFICA'),
     ]
 
 
@@ -49,7 +49,8 @@ class PersonaModel(models.Model):
     personaEstadoCivil = models.CharField(
         choices=opcionesEstadoCivil,
         db_column='estado_civil',
-        default='NO_ESPECIFICA'
+        default='NO_ESPECIFICA',
+        max_length=50
     )
     
 
@@ -61,4 +62,80 @@ class PersonaModel(models.Model):
     )
 
     class Meta:
+        db_table = 'personas'
+
+class CitaModel(models.Model):
+    opcionesEstado = [
+        ('ACTIVA','ACTIVA'),
+        ('CANCELADA','CANCELADA'),
+        ('POSPUESTA','POSPUESTA'),
+    ]
+
+
+    citaId = models.AutoField(
+        primary_key=True,
+        unique=True,
+        null=False,
+        db_column='id'
+    )
+    citaDescripcion = models.TextField(
+        null=False,
+        db_column='descripcion'
+    )
+
+    citaFecha = models.DateTimeField(
+        null=False,
+        db_column='fecha'
+    )
+
+    citaLatitud = models.FloatField(
+        null=False,
+        db_column='latitud'
+    )
+
+    citaLongitud = models.FloatField(
+        null=False,
+        db_column='longitud'
+    )
+
+    
+    personaEstadoCivil = models.CharField(
+        choices=opcionesEstado,
+        db_column='estado',
+        null=False,
+        max_length=50,
+    )
+    
+    
+    createdAt = models.DateTimeField(
+        auto_now=True,
+        db_column='create_at'
+    )
+
+
+    updateAt = models.DateTimeField(
+        auto_now=True,
+        db_column='updated_at'
+    )
+
+
+    citador = models.ForeignKey(
+        to=PersonaModel,
+        db_column='citador_id',
+        on_delete=models.PROTECT,
+        related_name='personaCitas'
+    )
+
+    citado = models.ForeignKey(
+        to=PersonaModel,
+        db_column='citado_id',
+        on_delete=models.PROTECT,
+        related_name='personaCitadas'
+    )
+
+    class Meta:
+        db_table = 'citas'
+        unique_together =[['citaFecha','citador'],['citaFecha','citado']]
+        ordering = ['-citaFecha']
+
         
