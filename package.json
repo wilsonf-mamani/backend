@@ -1,0 +1,19 @@
+{
+  "name": "cafeteria",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilsonf-mamani/backend.git"
+  },
+  "author": "wmamani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wilsonf-mamani/backend/issues"
+  },
+  "homepage": "https://github.com/wilsonf-mamani/backend#readme"
+}
