@@ -1,4 +1,6 @@
+import { compareSync } from "bcrypt";
 import { prisma } from "../prisma.js";
+import jwt from "jsonwebtoken";
 
 export class AuthService {
     static async login({ correo, password}) {
@@ -10,6 +12,17 @@ export class AuthService {
             rejectOnNotFound: true,
         });
 
-        return { message : "Si existe"}
+        const resultado = compareSync(password, usuarioEncontrado.password);
+
+        if (resultado) {
+            const token = jwt.sign(
+                { id:usuarioEncontrado.id, mensaje_oculto: "hola soy un mensaje"},
+                process.env.jwt_secret,
+                { expiresIn: 100}
+            )
+            return { message: "Si es el usuario", token };
+        } else {
+            return { message: "Credenciales incorrectas" };
+        }
     }
 }
