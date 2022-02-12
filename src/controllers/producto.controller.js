@@ -13,3 +13,16 @@ export async function crear(req, res) {
     }
 
 }
+
+export async function devolver(req, res) {
+    const { id } = req.params;
+    const resultado = await ProductoService.devolverProducto(id);
+
+    return res.json(resultado);
+}
+
+export async function devolverProductos(req, res) {
+    const resultado = await ProductoService.listarProductos();
+
+    return res.json(resultado);
+}
